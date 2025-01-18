@@ -1,0 +1,19 @@
+services:
+  app:
+    build:
+      context: mobile
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8081:8081" # Expo packager port
+      - "19000:19000" # Expo dev tools
+      - "19001:19001" # Metro bundler
+      - "19002:19002" # Expo debug
+    volumes:
+      - .:/app
+    #   - /app/node_modules
+    environment:
+      - EXPO_DEVTOOLS_LISTEN_ADDRESS=0.0.0.0
+      - REACT_NATIVE_PACKAGER_HOSTNAME=0.0.0.0
+    stdin_open: true
+    tty: true
+    command: ["npm", "run", "start"]
